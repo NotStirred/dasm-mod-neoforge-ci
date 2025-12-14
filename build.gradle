@@ -25,7 +25,8 @@ base {
     archivesName = mod_id
 }
 
-var dasm_version = System.getenv("DASM_VERSION") ?: "3.2.1" // default is only for non-ci situations just so the project works
+var isCI = System.getenv("CI") == "true" ?: false
+var dasm_version = "3.2.0" // default is only for non-ci situations just so the project works
 var neo_version = System.getenv("NEO_VERSION") ?: "21.10.64" // default is only for non-ci situations just so the project works
 var minecraft_version = "1." + neo_version.substring(0, neo_version.lastIndexOf('.'))
 var java_version = -1
@@ -81,7 +82,9 @@ configurations {
 
 dependencies {
     compileOnly("io.github.notstirred:dasm:$dasm_version:api")
-    runtimeOnly("io.github.notstirred:dasm-neoforge:$dasm_version")
+    if (!isCI) { // in CI the dasm jar gets placed in the mods folder
+        runtimeOnly("io.github.notstirred:dasm-neoforge:$dasm_version")
+    }
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.13.0")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.13.0")
