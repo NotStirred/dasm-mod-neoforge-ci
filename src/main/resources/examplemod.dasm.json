@@ -1,0 +1,7 @@
+{
+    "package": "com.example.examplemod",
+    "minVersion": "0.8",
+    "dasm": [
+        "com.example.examplemod.ExampleMod"
+    ]
+}
