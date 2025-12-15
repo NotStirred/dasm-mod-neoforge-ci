@@ -15,11 +15,17 @@ public class ExampleMod {
 
     public ExampleMod(IEventBus modEventBus, ModContainer modContainer) {
         src("SRC");
-        dst("DST");
+        try {
+            dst("DST");
+            System.exit(0);
+        } catch (UnsatisfiedLinkError e) {
+            System.err.println("Dasm Failure for DST");
+            System.exit(1);
+        }
     }
 
     public static void src(String text) {
-        System.out.println("Dasm Success for " + text);
+        System.err.println("Dasm Success for " + text);
     }
 
     @TransformFromMethod(value = "src(Ljava/lang/String;)V", owner = @Ref(ExampleMod.class))
