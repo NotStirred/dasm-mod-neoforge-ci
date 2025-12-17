@@ -37,7 +37,7 @@ var java_version = -1
 def neo_artifact_version = new DefaultArtifactVersion(neo_version)
 if (neo_artifact_version.majorVersion > 20) {
     java_version = 21
-} else if (neo_artifact_version.majorVersion == 20 && neo_artifact_version.minorVersion >= 6) {
+} else if (neo_artifact_version.majorVersion == 20 && neo_artifact_version.minorVersion >= 5) {
     java_version = 21
 } else {
     java_version = 17
